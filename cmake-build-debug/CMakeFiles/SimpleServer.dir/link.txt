@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/SimpleServer.dir/src/main.cpp.o CMakeFiles/SimpleServer.dir/src/lock/lock.cpp.o CMakeFiles/SimpleServer.dir/src/thread_pool/thread_pool.cpp.o CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o -o SimpleServer 
