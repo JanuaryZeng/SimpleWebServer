@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/zxj/project/job_related/SimpleServer/include/http_conn -I/home/zxj/project/job_related/SimpleServer/include/server -I/home/zxj/project/job_related/SimpleServer/include/lock -I/home/zxj/project/job_related/SimpleServer/include/thread_pool
 
-CXX_FLAGS = -g -std=gnu++11
+CXX_FLAGS =  -O -Wall -g -ggdb -fpermissive   -std=c++11 -std=gnu++11
 

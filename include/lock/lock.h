@@ -4,49 +4,110 @@
 
 #ifndef SIMPLESERVER_LOCK_H
 #define SIMPLESERVER_LOCK_H
-#include<pthread.h>
+#include <pthread.h>
 #include <exception>
 #include <iostream>
-namespace zxj {
-//互斥锁封装类
-class locker {
+#include <semaphore.h>
+
+//信号量封装类
+class sem
+{
 public:
-    locker();
+    sem(){
+        if (sem_init(&__m_sem, 0, 0) != 0){
+            throw std::exception();
+        }
+    }
+    sem(int num)
+    {
+        if (sem_init(&__m_sem, 0, num) != 0)
+        {
+            throw std::exception();
+        }
+    }
+    ~sem()
+    {
+        sem_destroy(&__m_sem);
+    }
+    bool wait()
+    {
+        return sem_wait(&__m_sem) == 0;
+    }
+    bool post()
+    {
+        return sem_post(&__m_sem) == 0;
+    }
+private:
+    sem_t __m_sem;
+};
 
-    ~locker();
 
-    bool lock();
+//互斥锁封装类
+class locker
+{
+public:
+    locker() {
+        if (pthread_mutex_init(&__m_mutex, NULL) != 0){
+            throw std::exception();
+        }
+    }
 
-    //如果目标可以加锁，对目标加锁，不能加锁返回false
-    bool trylock();
+    ~locker() {
+        pthread_mutex_destroy(&__m_mutex);
+    }
 
-    bool unlock();
+    bool lock(){
+        return pthread_mutex_lock(&__m_mutex) == 0;
+    }
 
-    pthread_mutex_t *get();
+//    如果目标可以加锁，对目标加锁，不能加锁返回false
+//    bool trylock();
+
+    bool unlock(){
+        return pthread_mutex_unlock(&__m_mutex) == 0;
+    }
+
+    pthread_mutex_t *get() {
+        return &__m_mutex;
+    }
 
 private:
     pthread_mutex_t __m_mutex;
 };
 
 //条件变量封装类
-
-class cond {
+class cond
+{
 public:
-    cond();
+    cond(){
+        if (pthread_cond_init(&__m_cond, NULL) != 0){
+            throw std::exception();
+        }
+    }
 
-    ~cond();
+    ~cond(){
+        pthread_cond_destroy(&__m_cond);
+    }
 
-    bool wait(locker &mutex);
+    bool wait(pthread_mutex_t *mutex){
+        return pthread_cond_wait(&__m_cond, mutex) == 0;
+    }
 
-    bool signal();
+    bool signal(){
+        return pthread_cond_signal(&__m_cond) == 0;
+    }
 
-    bool broadcast();
+    bool broadcast(){
+        return pthread_cond_broadcast(&__m_cond) == 0;
+    }
 
-    bool timewait(locker &mutex, struct timespec t);
+    bool timewait(pthread_mutex_t *mutex, struct timespec t) {
+        return pthread_cond_timedwait(&__m_cond, mutex, &t);
+    }
 
 private:
     pthread_cond_t __m_cond;
 };
 
-}
+
 #endif //SIMPLESERVER_LOCK_H

@@ -67,10 +67,10 @@ RM = /home/zxj/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.7142.21/bin/cm
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zxj/project/CLionProjects/NetCode/SimpleServer
+CMAKE_SOURCE_DIR = /home/zxj/project/job_related/SimpleServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zxj/project/CLionProjects/NetCode/SimpleServer/cmake-build-debug
+CMAKE_BINARY_DIR = /home/zxj/project/job_related/SimpleServer/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zxj/project/CLionProjects/NetCode/SimpleServer/cmake-build-debug/CMakeFiles /home/zxj/project/CLionProjects/NetCode/SimpleServer/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles /home/zxj/project/job_related/SimpleServer/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zxj/project/CLionProjects/NetCode/SimpleServer/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,32 +142,32 @@ SimpleServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/build
 .PHONY : SimpleServer/fast
 
-src/lock/lock.o: src/lock/lock.cpp.o
+src/http_conn/http_conn.o: src/http_conn/http_conn.cpp.o
 
-.PHONY : src/lock/lock.o
+.PHONY : src/http_conn/http_conn.o
 
 # target to build an object file
-src/lock/lock.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/lock/lock.cpp.o
-.PHONY : src/lock/lock.cpp.o
+src/http_conn/http_conn.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o
+.PHONY : src/http_conn/http_conn.cpp.o
 
-src/lock/lock.i: src/lock/lock.cpp.i
+src/http_conn/http_conn.i: src/http_conn/http_conn.cpp.i
 
-.PHONY : src/lock/lock.i
+.PHONY : src/http_conn/http_conn.i
 
 # target to preprocess a source file
-src/lock/lock.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/lock/lock.cpp.i
-.PHONY : src/lock/lock.cpp.i
+src/http_conn/http_conn.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.i
+.PHONY : src/http_conn/http_conn.cpp.i
 
-src/lock/lock.s: src/lock/lock.cpp.s
+src/http_conn/http_conn.s: src/http_conn/http_conn.cpp.s
 
-.PHONY : src/lock/lock.s
+.PHONY : src/http_conn/http_conn.s
 
 # target to generate assembly for a file
-src/lock/lock.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/lock/lock.cpp.s
-.PHONY : src/lock/lock.cpp.s
+src/http_conn/http_conn.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.s
+.PHONY : src/http_conn/http_conn.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -223,33 +223,6 @@ src/server/webServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.s
 .PHONY : src/server/webServer.cpp.s
 
-src/thread_pool/thread_pool.o: src/thread_pool/thread_pool.cpp.o
-
-.PHONY : src/thread_pool/thread_pool.o
-
-# target to build an object file
-src/thread_pool/thread_pool.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/thread_pool/thread_pool.cpp.o
-.PHONY : src/thread_pool/thread_pool.cpp.o
-
-src/thread_pool/thread_pool.i: src/thread_pool/thread_pool.cpp.i
-
-.PHONY : src/thread_pool/thread_pool.i
-
-# target to preprocess a source file
-src/thread_pool/thread_pool.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/thread_pool/thread_pool.cpp.i
-.PHONY : src/thread_pool/thread_pool.cpp.i
-
-src/thread_pool/thread_pool.s: src/thread_pool/thread_pool.cpp.s
-
-.PHONY : src/thread_pool/thread_pool.s
-
-# target to generate assembly for a file
-src/thread_pool/thread_pool.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/thread_pool/thread_pool.cpp.s
-.PHONY : src/thread_pool/thread_pool.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -259,18 +232,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SimpleServer"
-	@echo "... src/lock/lock.o"
-	@echo "... src/lock/lock.i"
-	@echo "... src/lock/lock.s"
+	@echo "... src/http_conn/http_conn.o"
+	@echo "... src/http_conn/http_conn.i"
+	@echo "... src/http_conn/http_conn.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/server/webServer.o"
 	@echo "... src/server/webServer.i"
 	@echo "... src/server/webServer.s"
-	@echo "... src/thread_pool/thread_pool.o"
-	@echo "... src/thread_pool/thread_pool.i"
-	@echo "... src/thread_pool/thread_pool.s"
 .PHONY : help
 
 
