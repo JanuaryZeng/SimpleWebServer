@@ -14,37 +14,9 @@ http_conn::~http_conn() {
 
 }
 
-void setnonblocking(int fd){
-    int old_flag = fcntl(fd, F_GETFL);
-    int new_flag = old_flag | O_NONBLOCK;
-    fcntl(fd, F_SETFL, new_flag);
-}
 
-void addfd(int epolldf, int fd, bool one_shot){
-    epoll_event event;
-    event.data.fd = fd;
-//    event.events = EPOLLIN | EPOLLRDHUP;
-    event.events = EPOLLIN | EPOLLRDHUP | EPOLLET;
-    if(one_shot){
-        event.events |= EPOLLONESHOT;
-    }
-    epoll_ctl(epolldf, EPOLL_CTL_ADD, fd, &event);
-    //设置文件描述符非阻塞
-    setnonblocking(fd);
-}
 
-void removefd(int epollfd, int fd){
-    epoll_ctl(epollfd, EPOLL_CTL_DEL, fd, 0);
-    close(fd);
-}
 
-void modfd(int epollfd, int fd, int ev){
-    epoll_event event;
-    event.data.fd = fd;
-    //重置oneshot时间，确保下一次。
-    event.events = ev | EPOLLONESHOT | EPOLLRDHUP;
-    epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
-}
 void http_conn::init(int sockfd, const sockaddr_in &addr) {
     m_sockfd = sockfd;
     m_address = addr;
