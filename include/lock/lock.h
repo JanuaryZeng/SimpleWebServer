@@ -9,6 +9,8 @@
 #include <iostream>
 #include <semaphore.h>
 
+#include "../util/noncopyable.h"
+
 //信号量封装类
 class sem
 {
@@ -109,5 +111,13 @@ private:
     pthread_cond_t m_cond;
 };
 
+class MutexLockGuard : Noncopyable
+{
+public:
+    explicit MutexLockGuard(locker &_mutex) : mutex(_mutex) { mutex.lock(); }
+    ~MutexLockGuard() { mutex.unlock(); }
+private:
+    locker &mutex;
+};
 
 #endif //SIMPLESERVER_LOCK_H
