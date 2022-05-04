@@ -28,6 +28,8 @@
 
 #include "../lock/lock.h"
 #include "../util/util.h"
+#include "../timer/timer.h"
+#include "session.h"
 
 struct FileStat{
     FileStat(struct stat _status,char *_addraass):status(_status),address(_addraass),usage_times(1){}
@@ -164,7 +166,7 @@ private:
     size_t bytes_to_send;
     size_t bytes_have_send;
     std::string doc_root;
-    static std::unordered_map<std::string,std::shared_ptr<FileStat> > file_cache;
+    static std::unordered_map<std::string,std::shared_ptr<FileStat>> file_cache;
     static locker file_mutex;
 };
 
