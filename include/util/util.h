@@ -43,6 +43,37 @@ bool login_user(std::string username, std::string passwd);
 bool register_user(std::string username, std::string passwd);
 
 void addsig(int sig, void(handler)(int), bool restart = true);
-
+class Sig
+{
+public:
+    static int pipefd[2];
+    static int epollfd;
+    static void init(int epollfd_)
+    {
+        epollfd = epollfd_;
+        int ret = socketpair(PF_UNIX, SOCK_STREAM, 0, pipefd);
+        if(ret==-1){
+//            LOG_ERROR("create socketpait faild\n");
+            abort();
+        }
+        setnonblocking(pipefd[0]);
+        addfd(epollfd, pipefd[0], false);
+    }
+    static bool AddSignal(int sig)
+    {
+        //添加信号处理函数
+        addsig(sig,sig_handler,true);
+        return true;
+    }
+    static void sig_handler(int sig)
+    {
+        //为保证函数的可重入性，保留原来的errno
+        int save_errno = errno;
+        int msg = sig;
+        send(pipefd[1], (char *)&msg, 1, 0);
+        errno = save_errno;
+    }
+};
+void usage();
 
 #endif //SIMPLESERVER_UTIL_H

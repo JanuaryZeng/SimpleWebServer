@@ -54,7 +54,7 @@ public:
     }
     bool add_timer(std::shared_ptr<heap_timer> timer);
     bool del_timer(std::shared_ptr<heap_timer> timer);
-    std::shared_ptr<heap_time> top() const{
+    std::shared_ptr<heap_timer> top() const{
         if(empty()){
             return nullptr;
         }

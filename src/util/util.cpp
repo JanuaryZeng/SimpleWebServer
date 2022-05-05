@@ -77,3 +77,121 @@ void reset_oneshot(int epollfd, int fd){
     event.events = EPOLLIN | EPOLLET | EPOLLRDHUP | EPOLLONESHOT;;
     epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
 }
+
+void close_http_conn_cb_func(shared_ptr<http_conn> user)
+{
+    if (user == nullptr)
+        return;
+    epoll_ctl(http_conn::m_epollfd, EPOLL_CTL_DEL, user->getSockfd(), 0);
+    assert(user);
+    close(user->getSockfd());
+    http_conn::m_user_count--;
+}
+//解析post 表单字符串
+std::map<string, string> parse_form(std::string str)
+{
+    std::map<string, string> kv;
+    std::string key;
+    std::string val;
+    bool iskey = true;
+    for (auto c : str)
+    {
+        if (c == '=')
+        {
+            iskey = false;
+            continue;
+        }
+        if (c == '&')
+        {
+            iskey = true;
+            kv[key] = val;
+            key.clear();
+            val.clear();
+            continue;
+        }
+        if (iskey)
+            key.push_back(c);
+        else
+            val.push_back(c);
+    }
+    if (key.size() && val.size())
+    {
+        kv[key] = val;
+    }
+    return kv;
+}
+//用户登录验证函数
+bool login_user(std::string username, std::string passwd)
+{
+    // static map<string,string> login;
+    // if(login.find(username)!=login.end())
+    // return true;
+    Connection conn;
+    std::string select_sql = "select * from user where username='" + username + "' and passwd='" + passwd + "'";
+    // printf("%s\n", select_sql.c_str());
+    if (mysql_query(conn.GetConn(), select_sql.c_str()))
+    {
+        return false;
+    }
+    MYSQL_RES *res = mysql_store_result(conn.GetConn());
+    if (mysql_num_rows(res))
+    {
+        // login[username]=passwd;
+        mysql_free_result(res);
+        return true;
+    }
+    else
+    {
+        mysql_free_result(res);
+        return false;
+    }
+}
+//用户注册验证函数
+bool register_user(std::string username, std::string passwd)
+{
+    Connection conn;
+    std::string insert_sql = "insert into user select '" + username + "','" + passwd + "'";
+    // printf(insert_sql.c_str());
+    if (mysql_query(conn.GetConn(), insert_sql.c_str()))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    MYSQL_RES *res = mysql_store_result(conn.GetConn());
+    if (res)
+    {
+        mysql_free_result(res);
+        return true;
+    }
+    else
+    {
+        mysql_free_result(res);
+        return false;
+    }
+}
+//添加信号
+void addsig(int sig, void(handler)(int), bool restart)
+{
+    struct sigaction sa;
+    memset(&sa, '\0', sizeof(sa));
+    sa.sa_handler = handler;
+    if (restart)
+        sa.sa_flags |= SA_RESTART;
+    sigfillset(&sa.sa_mask);
+    assert(sigaction(sig, &sa, NULL) != -1);
+}
+//显示参数说明
+void usage()
+{
+    fprintf(stderr,
+            "webserver [option] \n"
+            "  -p    监听端口号   (默认1234).\n"
+            "  -r    请求队列最大长度    (默认10000).\n"
+            "  -s    数据库连接数量  (默认为8).\n"
+            "  -t    线程数量    (默认为5).\n"
+            "  -l    是否使用优雅关闭连接  (1是 0否 默认:0 不使用).\n"
+            "  -c    关闭日志.\n");
+}

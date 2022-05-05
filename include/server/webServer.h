@@ -38,7 +38,7 @@ public:
 
 private:
 
-//    void adjustTimer(shared_ptr<heap_timer> timer);
+    void adjustTimer(std::shared_ptr<heap_timer> timer);
     void initHttpConn(int connfd, struct sockaddr_in client_address);
     bool acceptClient();
     bool dealTimer();

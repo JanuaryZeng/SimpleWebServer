@@ -41,7 +41,7 @@ public:
         return UNLOGIN;
     }
 
-    std::string get_username(string sessionid){
+    std::string get_username(std::string sessionid){
         MutexLockGuard lock(mutex);
         if(cache.count(sessionid)){
             movetotop(sessionid);
@@ -67,7 +67,7 @@ public:
             cache[sessionid] = users.begin();
         }
         cache[sessionid]->status = LOGIN;
-        deltimeout();
+        dealtimeout();
         return sessionid;
     }
 
@@ -85,7 +85,7 @@ private:
     void dealtimeout(){
         time_t curtime = time(NULL);
         while(!users.empty() && users.back().last_time + timeout * 60 < curtime){
-            cache.erase(users.back());
+            cache.erase(users.back().username);
             users.pop_back();
         }
     }
@@ -96,7 +96,7 @@ private:
         std::string md5_string;
         unsigned char md[16] = {0};
         char tmp[40] = {0};
-        std::string code = src + to_string(time(NULL));
+        std::string code = src + std::to_string(time(NULL));
         MD5_Init(&ctx);
         MD5_Update(&ctx, code.c_str(), code.size());
         MD5_Final(md, &ctx);
