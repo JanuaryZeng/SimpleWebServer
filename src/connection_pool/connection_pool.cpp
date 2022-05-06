@@ -1,7 +1,7 @@
 //
 // Created by zxj on 2022/5/5.
 //
-#include "connection_pool.h"
+#include "../../include/connection_pool/connection_pool.h"
 
 ConnectionPool::ConnectionPool() : reserve_(0)
 {
@@ -53,13 +53,13 @@ void ConnectionPool::init(std::string host, std::string user, std::string passwd
         if (NULL == conn)
         {
             // log
-            LOG_ERROR("mysqlpool init failed!!!\n");
+//            LOG_ERROR("mysqlpool init failed!!!\n");
             abort();
         }
         conn = mysql_real_connect(conn, host.c_str(), user.c_str(), passwd.c_str(), db_name.c_str(), port, NULL, 0);
         if (NULL == conn)
         {
-            LOG_ERROR("mysqlpool init failed!!!\n");
+//            LOG_ERROR("mysqlpool init failed!!!\n");
             abort();
         }
         pool_.push_back(conn);
