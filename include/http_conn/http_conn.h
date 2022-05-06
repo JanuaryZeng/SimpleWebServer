@@ -85,7 +85,7 @@ public:
 
 public:
     void run();
-    void init(int sockfd, const sockaddr_in &addr, string root);
+    void init(int sockfd, const sockaddr_in &addr, std::string root);
     int getSockfd()
     {
         return m_sockfd;
@@ -130,11 +130,11 @@ private:
 public:
     static int m_epollfd;
     static int m_user_count;
-    static shared_ptr<TimeHeap> time_heap;
+    static std::shared_ptr<TimeHeap> time_heap;
     static Session session; //session保存登录状态
-    weak_ptr<heap_timer> timer;
+    std::weak_ptr<heap_timer> timer;
     LOGIN_STATUS login_stat;
-    string sessionid;
+    std::string sessionid;
 
 private:
     int m_state; //读为0, 写为1

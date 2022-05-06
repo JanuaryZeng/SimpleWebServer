@@ -6,6 +6,7 @@
 #define SIMPLESERVER_CONFIG_H
 
 #include <string>
+#include "../../include/log/logger.h"
 
 class Config
 {

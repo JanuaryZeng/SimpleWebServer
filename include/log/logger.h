@@ -9,8 +9,8 @@
 #include <cstring>
 #include <time.h>
 #include <sys/time.h>
-#include "locker.h"
-#include "logstream.h"
+#include "../lock/lock.h"
+#include "../log/logstream.h"
 
 using namespace std;
 //日志级别

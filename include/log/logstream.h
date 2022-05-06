@@ -10,8 +10,8 @@
 #include <cstring>
 #include <cassert>
 #include <unistd.h>
-#include "noncopyable.h"
-#include "locker.h"
+#include "../util/noncopyable.h"
+#include "../lock/lock.h"
 using namespace std;
 
 const size_t MIN_BUF_SIZE = 4096;
