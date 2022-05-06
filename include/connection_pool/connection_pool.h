@@ -11,7 +11,7 @@
 #include <string>
 #include <algorithm>
 
-#include "../lock/locker.h"
+#include "../lock/lock.h"
 #include "../util/noncopyable.h"
 #include "../log/logger.h"
 const int MIN_CONN_NUM = 1; //数据库最少链接数

@@ -142,6 +142,33 @@ SimpleServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/build
 .PHONY : SimpleServer/fast
 
+src/connection_pool/connection_pool.o: src/connection_pool/connection_pool.cpp.o
+
+.PHONY : src/connection_pool/connection_pool.o
+
+# target to build an object file
+src/connection_pool/connection_pool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o
+.PHONY : src/connection_pool/connection_pool.cpp.o
+
+src/connection_pool/connection_pool.i: src/connection_pool/connection_pool.cpp.i
+
+.PHONY : src/connection_pool/connection_pool.i
+
+# target to preprocess a source file
+src/connection_pool/connection_pool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.i
+.PHONY : src/connection_pool/connection_pool.cpp.i
+
+src/connection_pool/connection_pool.s: src/connection_pool/connection_pool.cpp.s
+
+.PHONY : src/connection_pool/connection_pool.s
+
+# target to generate assembly for a file
+src/connection_pool/connection_pool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.s
+.PHONY : src/connection_pool/connection_pool.cpp.s
+
 src/http_conn/http_conn.o: src/http_conn/http_conn.cpp.o
 
 .PHONY : src/http_conn/http_conn.o
@@ -168,6 +195,60 @@ src/http_conn/http_conn.s: src/http_conn/http_conn.cpp.s
 src/http_conn/http_conn.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.s
 .PHONY : src/http_conn/http_conn.cpp.s
+
+src/log/logger.o: src/log/logger.cpp.o
+
+.PHONY : src/log/logger.o
+
+# target to build an object file
+src/log/logger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o
+.PHONY : src/log/logger.cpp.o
+
+src/log/logger.i: src/log/logger.cpp.i
+
+.PHONY : src/log/logger.i
+
+# target to preprocess a source file
+src/log/logger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/log/logger.cpp.i
+.PHONY : src/log/logger.cpp.i
+
+src/log/logger.s: src/log/logger.cpp.s
+
+.PHONY : src/log/logger.s
+
+# target to generate assembly for a file
+src/log/logger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/log/logger.cpp.s
+.PHONY : src/log/logger.cpp.s
+
+src/log/logstream.o: src/log/logstream.cpp.o
+
+.PHONY : src/log/logstream.o
+
+# target to build an object file
+src/log/logstream.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o
+.PHONY : src/log/logstream.cpp.o
+
+src/log/logstream.i: src/log/logstream.cpp.i
+
+.PHONY : src/log/logstream.i
+
+# target to preprocess a source file
+src/log/logstream.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.i
+.PHONY : src/log/logstream.cpp.i
+
+src/log/logstream.s: src/log/logstream.cpp.s
+
+.PHONY : src/log/logstream.s
+
+# target to generate assembly for a file
+src/log/logstream.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.s
+.PHONY : src/log/logstream.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -223,6 +304,87 @@ src/server/webServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.s
 .PHONY : src/server/webServer.cpp.s
 
+src/timer/timer.o: src/timer/timer.cpp.o
+
+.PHONY : src/timer/timer.o
+
+# target to build an object file
+src/timer/timer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o
+.PHONY : src/timer/timer.cpp.o
+
+src/timer/timer.i: src/timer/timer.cpp.i
+
+.PHONY : src/timer/timer.i
+
+# target to preprocess a source file
+src/timer/timer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.i
+.PHONY : src/timer/timer.cpp.i
+
+src/timer/timer.s: src/timer/timer.cpp.s
+
+.PHONY : src/timer/timer.s
+
+# target to generate assembly for a file
+src/timer/timer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.s
+.PHONY : src/timer/timer.cpp.s
+
+src/util/config.o: src/util/config.cpp.o
+
+.PHONY : src/util/config.o
+
+# target to build an object file
+src/util/config.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/util/config.cpp.o
+.PHONY : src/util/config.cpp.o
+
+src/util/config.i: src/util/config.cpp.i
+
+.PHONY : src/util/config.i
+
+# target to preprocess a source file
+src/util/config.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/util/config.cpp.i
+.PHONY : src/util/config.cpp.i
+
+src/util/config.s: src/util/config.cpp.s
+
+.PHONY : src/util/config.s
+
+# target to generate assembly for a file
+src/util/config.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/util/config.cpp.s
+.PHONY : src/util/config.cpp.s
+
+src/util/util.o: src/util/util.cpp.o
+
+.PHONY : src/util/util.o
+
+# target to build an object file
+src/util/util.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/util/util.cpp.o
+.PHONY : src/util/util.cpp.o
+
+src/util/util.i: src/util/util.cpp.i
+
+.PHONY : src/util/util.i
+
+# target to preprocess a source file
+src/util/util.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/util/util.cpp.i
+.PHONY : src/util/util.cpp.i
+
+src/util/util.s: src/util/util.cpp.s
+
+.PHONY : src/util/util.s
+
+# target to generate assembly for a file
+src/util/util.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimpleServer.dir/build.make CMakeFiles/SimpleServer.dir/src/util/util.cpp.s
+.PHONY : src/util/util.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -232,15 +394,33 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SimpleServer"
+	@echo "... src/connection_pool/connection_pool.o"
+	@echo "... src/connection_pool/connection_pool.i"
+	@echo "... src/connection_pool/connection_pool.s"
 	@echo "... src/http_conn/http_conn.o"
 	@echo "... src/http_conn/http_conn.i"
 	@echo "... src/http_conn/http_conn.s"
+	@echo "... src/log/logger.o"
+	@echo "... src/log/logger.i"
+	@echo "... src/log/logger.s"
+	@echo "... src/log/logstream.o"
+	@echo "... src/log/logstream.i"
+	@echo "... src/log/logstream.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/server/webServer.o"
 	@echo "... src/server/webServer.i"
 	@echo "... src/server/webServer.s"
+	@echo "... src/timer/timer.o"
+	@echo "... src/timer/timer.i"
+	@echo "... src/timer/timer.s"
+	@echo "... src/util/config.o"
+	@echo "... src/util/config.i"
+	@echo "... src/util/config.s"
+	@echo "... src/util/util.o"
+	@echo "... src/util/util.i"
+	@echo "... src/util/util.s"
 .PHONY : help
 
 

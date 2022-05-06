@@ -76,9 +76,87 @@ include CMakeFiles/SimpleServer.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/SimpleServer.dir/flags.make
 
+CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
+CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o: ../src/connection_pool/connection_pool.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/connection_pool/connection_pool.cpp
+
+CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zxj/project/job_related/SimpleServer/src/connection_pool/connection_pool.cpp > CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.i
+
+CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zxj/project/job_related/SimpleServer/src/connection_pool/connection_pool.cpp -o CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.s
+
+CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
+CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o: ../src/log/logger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/log/logger.cpp
+
+CMakeFiles/SimpleServer.dir/src/log/logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SimpleServer.dir/src/log/logger.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zxj/project/job_related/SimpleServer/src/log/logger.cpp > CMakeFiles/SimpleServer.dir/src/log/logger.cpp.i
+
+CMakeFiles/SimpleServer.dir/src/log/logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SimpleServer.dir/src/log/logger.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zxj/project/job_related/SimpleServer/src/log/logger.cpp -o CMakeFiles/SimpleServer.dir/src/log/logger.cpp.s
+
+CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
+CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o: ../src/log/logstream.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/log/logstream.cpp
+
+CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zxj/project/job_related/SimpleServer/src/log/logstream.cpp > CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.i
+
+CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zxj/project/job_related/SimpleServer/src/log/logstream.cpp -o CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.s
+
+CMakeFiles/SimpleServer.dir/src/util/config.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
+CMakeFiles/SimpleServer.dir/src/util/config.cpp.o: ../src/util/config.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SimpleServer.dir/src/util/config.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/util/config.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/util/config.cpp
+
+CMakeFiles/SimpleServer.dir/src/util/config.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SimpleServer.dir/src/util/config.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zxj/project/job_related/SimpleServer/src/util/config.cpp > CMakeFiles/SimpleServer.dir/src/util/config.cpp.i
+
+CMakeFiles/SimpleServer.dir/src/util/config.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SimpleServer.dir/src/util/config.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zxj/project/job_related/SimpleServer/src/util/config.cpp -o CMakeFiles/SimpleServer.dir/src/util/config.cpp.s
+
+CMakeFiles/SimpleServer.dir/src/util/util.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
+CMakeFiles/SimpleServer.dir/src/util/util.cpp.o: ../src/util/util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SimpleServer.dir/src/util/util.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/util/util.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/util/util.cpp
+
+CMakeFiles/SimpleServer.dir/src/util/util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SimpleServer.dir/src/util/util.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zxj/project/job_related/SimpleServer/src/util/util.cpp > CMakeFiles/SimpleServer.dir/src/util/util.cpp.i
+
+CMakeFiles/SimpleServer.dir/src/util/util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SimpleServer.dir/src/util/util.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zxj/project/job_related/SimpleServer/src/util/util.cpp -o CMakeFiles/SimpleServer.dir/src/util/util.cpp.s
+
+CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
+CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o: ../src/timer/timer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/timer/timer.cpp
+
+CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zxj/project/job_related/SimpleServer/src/timer/timer.cpp > CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.i
+
+CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zxj/project/job_related/SimpleServer/src/timer/timer.cpp -o CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.s
+
 CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
 CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o: ../src/server/webServer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/server/webServer.cpp
 
 CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.i: cmake_force
@@ -91,7 +169,7 @@ CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.s: cmake_force
 
 CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
 CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o: ../src/http_conn/http_conn.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/http_conn/http_conn.cpp
 
 CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.i: cmake_force
@@ -104,7 +182,7 @@ CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.s: cmake_force
 
 CMakeFiles/SimpleServer.dir/src/main.cpp.o: CMakeFiles/SimpleServer.dir/flags.make
 CMakeFiles/SimpleServer.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SimpleServer.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SimpleServer.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SimpleServer.dir/src/main.cpp.o -c /home/zxj/project/job_related/SimpleServer/src/main.cpp
 
 CMakeFiles/SimpleServer.dir/src/main.cpp.i: cmake_force
@@ -117,6 +195,12 @@ CMakeFiles/SimpleServer.dir/src/main.cpp.s: cmake_force
 
 # Object files for target SimpleServer
 SimpleServer_OBJECTS = \
+"CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o" \
+"CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o" \
+"CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o" \
+"CMakeFiles/SimpleServer.dir/src/util/config.cpp.o" \
+"CMakeFiles/SimpleServer.dir/src/util/util.cpp.o" \
+"CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o" \
 "CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o" \
 "CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o" \
 "CMakeFiles/SimpleServer.dir/src/main.cpp.o"
@@ -124,12 +208,18 @@ SimpleServer_OBJECTS = \
 # External object files for target SimpleServer
 SimpleServer_EXTERNAL_OBJECTS =
 
+SimpleServer: CMakeFiles/SimpleServer.dir/src/connection_pool/connection_pool.cpp.o
+SimpleServer: CMakeFiles/SimpleServer.dir/src/log/logger.cpp.o
+SimpleServer: CMakeFiles/SimpleServer.dir/src/log/logstream.cpp.o
+SimpleServer: CMakeFiles/SimpleServer.dir/src/util/config.cpp.o
+SimpleServer: CMakeFiles/SimpleServer.dir/src/util/util.cpp.o
+SimpleServer: CMakeFiles/SimpleServer.dir/src/timer/timer.cpp.o
 SimpleServer: CMakeFiles/SimpleServer.dir/src/server/webServer.cpp.o
 SimpleServer: CMakeFiles/SimpleServer.dir/src/http_conn/http_conn.cpp.o
 SimpleServer: CMakeFiles/SimpleServer.dir/src/main.cpp.o
 SimpleServer: CMakeFiles/SimpleServer.dir/build.make
 SimpleServer: CMakeFiles/SimpleServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable SimpleServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zxj/project/job_related/SimpleServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable SimpleServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SimpleServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

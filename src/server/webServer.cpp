@@ -3,7 +3,6 @@
 //
 
 #include "../../include/server/webServer.h"
-#include "webserver.h"
 WebServer::WebServer()
 {
     //http_conn类对象
@@ -279,4 +278,4 @@ void WebServer::loop()
             timeout = false;
         }
     }
-}}
+}

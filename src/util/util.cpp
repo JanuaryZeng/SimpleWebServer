@@ -2,6 +2,8 @@
 // Created by zxj on 2022/5/2.
 //
 #include "../../include/util/util.h"
+#include "../../include/connection_pool/connection_pool.h"
+#include "../../include/http_conn/http_conn.h"
 
 int setnonblocking(int fd){
     int old_option = fcntl(fd, F_GETFL, 0);
@@ -30,7 +32,7 @@ void modfd(int epollfd, int fd, int ev){
     epoll_event event;
     event.data.fd = fd;
     event.events = ev | EPOLLET | EPOLLONESHOT | EPOLLRDHUP;
-    epol_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
+    epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
 }
 
 int open_listenfd(int port){
@@ -55,7 +57,7 @@ int open_listenfd(int port){
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     server_addr.sin_port = htons((unsigned short)port);
-    if (bind(listenfd, (struct sockaddr_in *)&server_addr, sizeof(server_addr)) == -1){
+    if (bind(listenfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1){
         close(listenfd);
         return -1;
     }
@@ -78,7 +80,7 @@ void reset_oneshot(int epollfd, int fd){
     epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
 }
 
-void close_http_conn_cb_func(shared_ptr<http_conn> user)
+void close_http_conn_cb_func(std::shared_ptr<http_conn> user)
 {
     if (user == nullptr)
         return;
@@ -88,9 +90,9 @@ void close_http_conn_cb_func(shared_ptr<http_conn> user)
     http_conn::m_user_count--;
 }
 //解析post 表单字符串
-std::map<string, string> parse_form(std::string str)
+std::map<std::string, std::string> parse_form(std::string str)
 {
-    std::map<string, string> kv;
+    std::map<std::string, std::string> kv;
     std::string key;
     std::string val;
     bool iskey = true;

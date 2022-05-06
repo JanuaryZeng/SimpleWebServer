@@ -12,10 +12,17 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/include/server
     ${PROJECT_SOURCE_DIR}/include/lock
     ${PROJECT_SOURCE_DIR}/include/thread_pool
+    ${PROJECT_SOURCE_DIR}/include/connection_pool
+    ${PROJECT_SOURCE_DIR}/include/timer
+    ${PROJECT_SOURCE_DIR}/include/util
+    ${PROJECT_SOURCE_DIR}/include/log
 )
 
 #link_directories(/usr/lib/i386-linux-gnu/)
-
+aux_source_directory(${PROJECT_SOURCE_DIR}/src/connection_pool src)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src/log src)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src/util src)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src/timer src)
 aux_source_directory(${PROJECT_SOURCE_DIR}/src/server src)
 aux_source_directory(${PROJECT_SOURCE_DIR}/src/http_conn src)
 aux_source_directory(${PROJECT_SOURCE_DIR}/src src)

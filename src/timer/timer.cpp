@@ -7,9 +7,9 @@
 bool TimeHeap::add_timer(std::shared_ptr<heap_timer> timer) {
     if(!timer)
         return false;
-    if(cur_size >= capactity) {
+    if(curr_size >= capactity) {
         tick();
-        assert(cur_size < capactity);
+        assert(curr_size < capactity);
     }
     int hole = curr_size++;
     array[hole] = timer;
@@ -21,7 +21,7 @@ bool TimeHeap::add_timer(std::shared_ptr<heap_timer> timer) {
 bool TimeHeap::del_timer(std::shared_ptr<heap_timer> timer) {
     if(!timer){
         return false;
-    }r
+    }
     mutex.lock();
     overtimer.push_back(timer->hole_);
     mutex.unlock();
@@ -34,7 +34,7 @@ void TimeHeap::pop_timer() {
     if(empty())
         return;
     if(array[0]){
-        array[0] = array[--cur_size];
+        array[0] = array[--curr_size];
         array[0]->hole_ = 0;
         percolate_down(0);
     }
@@ -73,11 +73,13 @@ void TimeHeap::tick() {
 }
 
 void TimeHeap::percolate_up(int hole) {
-    std::shared_ptr<http_conn> tmp = array[hole];
+    std::shared_ptr<heap_timer> tmp = array[hole];
     int parent = 0;
-    for (; hole > 0; hole = parent){
-        parent = (hole - 1) >> 1;
-        if (array[parent]->expire <= tmp->expire){
+    for (; hole > 0; hole = parent)
+    {
+        parent = (hole - 1) / 2;
+        if (array[parent]->expire <= tmp->expire)
+        {
             break;
         }
         array[hole] = array[parent];
@@ -90,8 +92,8 @@ void TimeHeap::percolate_up(int hole) {
 void TimeHeap::percolate_down(int hole) {
     std::shared_ptr<heap_timer> tmp = array[hole];
     int child = hole*2+1;
-    for (; (hole*2+1) <= cur_size - 1; hole = child){
-        if(child + 1 <= cur_size - 1 && array[child+1]->expire > array[child]->expire){
+    for (; (hole*2+1) <= curr_size - 1; hole = child){
+        if(child + 1 <= curr_size - 1 && array[child+1]->expire > array[child]->expire){
             child++;
         }
         if(array[child]->expire < array[hole]->expire){

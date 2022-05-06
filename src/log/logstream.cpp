@@ -156,9 +156,11 @@ int LogStream::flush()
 
 void LogStream::run()
 {
+    mutex.lock();
     while (!stop)
     {
-        cond_.wait(); //等待　write_buf_　有被赋值
+        cond_.wait(mutex.get()); //等待　write_buf_　有被赋值
+        mutex.unlock();
         flushWriteBuf();
         if (cur_lines_ > max_lines_) //根据写入行数　更改文件名
         {

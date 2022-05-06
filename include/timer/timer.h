@@ -49,7 +49,7 @@ public:
 class TimeHeap
 {
 public:
-    TimeHeap(int cap) : capactity(cap), cur_size(0){
+    TimeHeap(int cap) : capactity(cap), curr_size(0){
         array.assign(cap, nullptr);
     }
     bool add_timer(std::shared_ptr<heap_timer> timer);
@@ -63,8 +63,8 @@ public:
     void pop_timer();
     void tick();
     bool adjustTimer(std::shared_ptr<heap_timer> timer, int delay);
-    bool empty() const {return cur_size == 0;}
-    bool size() const {return cur_size;}
+    bool empty() const {return curr_size == 0;}
+    bool size() const {return curr_size;}
 private:
     void percolate_down(int hole);//下滤操作
     void percolate_up(int hole);//上滤操作
@@ -74,7 +74,7 @@ private:
     void adjust();
     std::vector<std::shared_ptr<heap_timer>> array;
     int capactity;
-    int cur_size;
+    int curr_size;
 };
 
 #endif //SIMPLESERVER_TIMER_H
