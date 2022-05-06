@@ -25,16 +25,6 @@ webServer::~webServer() {
     close(listenfd);
 }
 
-void webServer::init() {
-    port = 10001;
-    thread_num = 4;
-    max_requests = 10000;
-    timeout = false;
-    stop_server = false;
-    //线程池初始化
-    thread_pool = std::make_shared<threadpool<http_conn>>(thread_num, max_requests);
-    initIO();
-}
 
 void webServer::initIO() {
     listenfd = open_listenfd(port);

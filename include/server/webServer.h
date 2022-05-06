@@ -32,8 +32,8 @@ class webServer {
 public:
     webServer();
     ~webServer();
-    //void init(Config config);
-    void init();
+    void init(Config config);
+//    void init();
     void loop();
 
 private:
