@@ -58,7 +58,7 @@ threadpool<T>::threadpool(int thread_number, int max_requests) : m_thread_number
             throw std::exception();
         }
         m_threads.push_back(tid);
-        printf("%d线程被创建\n",i);
+//        printf("%d线程被创建\n",i);
     }
 }
 

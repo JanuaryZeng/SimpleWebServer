@@ -5,82 +5,109 @@
 #include "../../include/connection_pool/connection_pool.h"
 #include "../../include/http_conn/http_conn.h"
 
-int setnonblocking(int fd){
+const int MAX_BUFF = 4096;
+
+int Sig::pipefd[2];
+int Sig::epollfd;
+
+//将文件描述符设置非阻塞
+int setnonblocking(int fd)
+{
     int old_option = fcntl(fd, F_GETFL, 0);
     int new_option = old_option | O_NONBLOCK;
-    fcntl(fd, F_SETFD, new_option);
+    fcntl(fd, F_SETFL, new_option);
     return old_option;
 }
 
-void addfd(int epollfd, int fd, bool one_shot){
+//将内核事件表注册读事件，ET模式，开启EPOLLONESHOT
+void addfd(int epollfd, int fd, bool one_shot)
+{
     epoll_event event;
     event.data.fd = fd;
+
     event.events = EPOLLIN | EPOLLET | EPOLLRDHUP;
 
-    if(one_shot)
+    if (one_shot)
         event.events |= EPOLLONESHOT;
     epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
     setnonblocking(fd);
 }
 
-void removefd(int epollfd, int fd){
+//从内核事件表删除描述符
+void removefd(int epollfd, int fd)
+{
     epoll_ctl(epollfd, EPOLL_CTL_DEL, fd, 0);
     close(fd);
 }
 
-void modfd(int epollfd, int fd, int ev){
+//将事件重置为EPOLLONESHOT
+void modfd(int epollfd, int fd, int ev)
+{
     epoll_event event;
     event.data.fd = fd;
     event.events = ev | EPOLLET | EPOLLONESHOT | EPOLLRDHUP;
     epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
 }
 
-int open_listenfd(int port){
-    if (port < 0 || port > 65535){
-        return -1;
-    }
-
-    //create socket(IPv4 + TCP), return fd
-    int listenfd = 0;
-    if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+int open_listenfd(int port)
+{
+    // 检查port值，取正确区间范围
+    if (port < 0 || port > 65535)
         return -1;
 
-    //消除bind时“Address already in use”错误
+    // 创建socket(IPv4 + TCP)，返回监听描述符
+    int listen_fd = 0;
+    if ((listen_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+        return -1;
+
+    // 消除bind时"Address already in use"错误
     int optval = 1;
-    if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval)) == -1){
-        close(listenfd);
+    if (setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &optval,
+                   sizeof(optval)) == -1)
+    {
+        close(listen_fd);
         return -1;
     }
 
+    // 设置服务器IP和Port，和监听描述副绑定
     struct sockaddr_in server_addr;
     bzero((char *)&server_addr, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     server_addr.sin_port = htons((unsigned short)port);
-    if (bind(listenfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1){
-        close(listenfd);
-        return -1;
-    }
-    // 开始监听，最大等待队列长为LISTENQ
-    if(listen(listenfd, 2048) == -1){
-        close(listenfd);
+    if (bind(listen_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
+    {
+        close(listen_fd);
         return -1;
     }
 
-    if(listenfd == -1)
-        close(listenfd);
-    return -1;
-    return listenfd;
+    // 开始监听，最大等待队列长为LISTENQ
+    if (listen(listen_fd, 2048) == -1)
+    {
+        close(listen_fd);
+        return -1;
+    }
+
+    // 无效监听描述符
+    if (listen_fd == -1)
+    {
+        close(listen_fd);
+        return -1;
+    }
+    return listen_fd;
 }
 
-void reset_oneshot(int epollfd, int fd){
+//重置fd上事件
+void reset_oneshot(int epollfd, int fd)
+{
     epoll_event event;
     event.data.fd = fd;
-    event.events = EPOLLIN | EPOLLET | EPOLLRDHUP | EPOLLONESHOT;;
+
+    event.events = EPOLLIN | EPOLLET | EPOLLRDHUP | EPOLLONESHOT;
     epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &event);
 }
-
-void close_http_conn_cb_func(std::shared_ptr<http_conn> user)
+//关闭http_conn连接的回调函数
+void close_http_conn_cb_func(shared_ptr<http_conn> user)
 {
     if (user == nullptr)
         return;
@@ -90,11 +117,11 @@ void close_http_conn_cb_func(std::shared_ptr<http_conn> user)
     http_conn::m_user_count--;
 }
 //解析post 表单字符串
-std::map<std::string, std::string> parse_form(std::string str)
+map<string, string> parse_form(string str)
 {
-    std::map<std::string, std::string> kv;
-    std::string key;
-    std::string val;
+    map<string, string> kv;
+    string key;
+    string val;
     bool iskey = true;
     for (auto c : str)
     {
@@ -123,13 +150,13 @@ std::map<std::string, std::string> parse_form(std::string str)
     return kv;
 }
 //用户登录验证函数
-bool login_user(std::string username, std::string passwd)
+bool login_user(string username, string passwd)
 {
     // static map<string,string> login;
     // if(login.find(username)!=login.end())
     // return true;
     Connection conn;
-    std::string select_sql = "select * from user where username='" + username + "' and passwd='" + passwd + "'";
+    string select_sql = "select * from user where username='" + username + "' and passwd='" + passwd + "'";
     // printf("%s\n", select_sql.c_str());
     if (mysql_query(conn.GetConn(), select_sql.c_str()))
     {
@@ -149,10 +176,10 @@ bool login_user(std::string username, std::string passwd)
     }
 }
 //用户注册验证函数
-bool register_user(std::string username, std::string passwd)
+bool register_user(string username, string passwd)
 {
     Connection conn;
-    std::string insert_sql = "insert into user select '" + username + "','" + passwd + "'";
+    string insert_sql = "insert into user select '" + username + "','" + passwd + "'";
     // printf(insert_sql.c_str());
     if (mysql_query(conn.GetConn(), insert_sql.c_str()))
     {

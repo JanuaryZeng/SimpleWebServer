@@ -20,13 +20,14 @@ const int TIMEOUT = 30; //单位分钟
 const int MAXCACHE = 10000;//最大缓存数
 int http_conn::m_user_count = 0;
 int http_conn::m_epollfd = -1;
-std::shared_ptr<TimeHeap> http_conn::time_heap;
+shared_ptr<TimeHeap> http_conn::time_heap;
 
-std::unordered_map<std::string,std::shared_ptr<FileStat>> http_conn::file_cache;
+unordered_map<string,shared_ptr<FileStat> > http_conn::file_cache;
 locker http_conn::file_mutex;
-
+Session http_conn::session(MAXCACHE,TIMEOUT);
 //关闭连接，关闭一个连接，客户总量减一
-void http_conn::close_conn() {
+void http_conn::close_conn()
+{
     //删除与该连接有关的定时器
     time_heap->del_timer(timer.lock());
     timer.reset();
@@ -38,17 +39,18 @@ void http_conn::close_conn() {
 }
 
 //初始化连接,外部调用初始化套接字地址
-void http_conn::init(int sockfd, const sockaddr_in &addr, std::string root) {
+void http_conn::init(int sockfd, const sockaddr_in &addr, string root)
+{
     m_sockfd = sockfd;
     m_address = addr;
     int reuse = 1;
     setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
     addfd(m_epollfd, sockfd, true);
     m_user_count++;
+
     init();
     doc_root = root;
 }
-
 
 //初始化新接受的连接
 //check_state默认为分析请求行状态
@@ -76,23 +78,32 @@ void http_conn::init()
     login_stat = UNLOGIN;
 }
 
-bool http_conn::read() {
-    if (m_read_idx >= READ_BUFFER_SIZE){
+//循环读取客户数据，直到无数据可读或对方关闭连接
+bool http_conn::read()
+{
+    if (m_read_idx >= READ_BUFFER_SIZE)
+    {
         return false;
     }
     int bytes_read = 0;
-    while (true){
-        bytes_read = recv(m_sockfd, m_read_idx + m_read_buf, READ_BUFFER_SIZE - m_read_idx, 0);
-        if (bytes_read == -1){
-            if (errno == EINTR){
+    while (true)
+    {
+        bytes_read = recv(m_sockfd, m_read_buf + m_read_idx, READ_BUFFER_SIZE - m_read_idx, 0);
+        if (bytes_read == -1)
+        {
+            if (errno == EINTR) //读取过程中被中断
+            {
                 bytes_read = 0;
                 continue;
             }
-            else if (errno == EAGAIN || errno == EWOULDBLOCK){
+            else if (errno == EAGAIN || errno == EWOULDBLOCK) //非阻塞IO文件描述符 发生阻塞
+            {
                 break;
             }
             return false;
-        }else if (bytes_read == 0){
+        }
+        else if (bytes_read == 0) //连接被关闭
+        {
             return false;
         }
         m_read_idx += bytes_read;
@@ -100,12 +111,17 @@ bool http_conn::read() {
     return true;
 }
 
-http_conn::LINE_STATUS http_conn::parse_line() {
-    char tmp;
-    for(; m_checked_idx < m_read_idx; ++m_checked_idx){
-        tmp = m_read_buf[m_checked_idx];
-        if (tmp == '\r'){
-            if((m_checked_idx + 1) == m_read_idx)
+//从状态机，用于分析出一行内容
+//返回值为行的读取状态，有LINE_OK,LINE_BAD,LINE_OPEN
+http_conn::LINE_STATUS http_conn::parse_line()
+{
+    char temp;
+    for (; m_checked_idx < m_read_idx; ++m_checked_idx)
+    {
+        temp = m_read_buf[m_checked_idx];
+        if (temp == '\r')
+        {
+            if ((m_checked_idx + 1) == m_read_idx)
                 return LINE_OPEN;
             else if (m_read_buf[m_checked_idx + 1] == '\n')
             {
@@ -115,7 +131,7 @@ http_conn::LINE_STATUS http_conn::parse_line() {
             }
             return LINE_BAD;
         }
-        else if (tmp == '\n')
+        else if (temp == '\n')
         {
             if (m_checked_idx > 1 && m_read_buf[m_checked_idx - 1] == '\r')
             {
@@ -128,6 +144,7 @@ http_conn::LINE_STATUS http_conn::parse_line() {
     }
     return LINE_OPEN;
 }
+
 //解析http请求行，获得请求方法，目标url及http版本号
 http_conn::HTTP_CODE http_conn::parse_request_line(char *text)
 {
@@ -216,12 +233,12 @@ http_conn::HTTP_CODE http_conn::parse_headers(char *text)
         char *p = strpbrk(text, ";");
         if(p)
             *p='\0';
-        sessionid = std::string(text);
+        sessionid = string(text);
         login_stat = session.get_status(sessionid);
     }
     else
     {
-//        LOG_DEBUG("oop!unknow header: %s\n", text);
+        LOG_DEBUG("oop!unknow header: %s\n", text);
     }
     return NO_REQUEST;
 }
@@ -258,7 +275,7 @@ http_conn::HTTP_CODE http_conn::process_read()
         {
             case CHECK_STATE_REQUESTLINE:
             {
-//                LOG_INFO("%s\n", text);
+                LOG_INFO("%s\n", text);
                 ret = parse_request_line(text);
                 if (ret == BAD_REQUEST)
                     return BAD_REQUEST;
@@ -296,12 +313,12 @@ http_conn::HTTP_CODE http_conn::do_post_request()
     strcpy(m_real_file, doc_root.c_str());
     const char *p = strrchr(m_url, '/'); //char *strrchr(const char *str, int c) 在参数 str 所指向的字符串中搜索最后一次出现字符 c（一个无符号字符）的位置
     p++;
-    std::map<std::string, std::string> kv_pair;
+    map<string, string> kv_pair;
     kv_pair = parse_form(m_content);
     if (strlen(p) == 5 && strncmp(p, "login", 5) == 0)
     {
-        std::string username = kv_pair["username"];
-        std::string passwd = kv_pair["passwd"];
+        string username = kv_pair["username"];
+        string passwd = kv_pair["passwd"];
 
         if (login_user(username, passwd))
         {
@@ -316,8 +333,8 @@ http_conn::HTTP_CODE http_conn::do_post_request()
     }
     else if (strlen(p) == 8 && strncmp(p, "register", 8) == 0)
     {
-        std::string username = kv_pair["username"];
-        std::string passwd = kv_pair["passwd"];
+        string username = kv_pair["username"];
+        string passwd = kv_pair["passwd"];
         // LOG_DEBUG("U:%s,P:%s\n",username.c_str(),passwd.c_str());
         if (register_user(username, passwd))
         {
@@ -370,7 +387,7 @@ http_conn::HTTP_CODE http_conn::do_get_request()
     int fd = open(m_real_file, O_RDONLY);
     address = (char *)mmap(0, m_file_stat.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
     close(fd);
-    file_stat = std::make_shared<FileStat>(m_file_stat,address);
+    file_stat = make_shared<FileStat>(m_file_stat,address);
     file_mutex.lock();
     file_cache[m_real_file]=file_stat;
     file_mutex.unlock();
@@ -384,7 +401,7 @@ void http_conn::unmap()
     }
     else if (file_stat)
     {
-        std::string file_name;
+        string file_name;
         uint32_t min_n=UINT32_MAX;
         file_mutex.lock();
         if(file_cache.size()<CACHE_SIZE)
@@ -483,7 +500,7 @@ bool http_conn::add_response(const char *format, ...)
 
 bool http_conn::add_status_line(int status, const char *title)
 {
-//    LOG_INFO("response: %s %d %s\r\n", "HTTP/1.1", status, title);
+    LOG_INFO("response: %s %d %s\r\n", "HTTP/1.1", status, title);
     return add_response("%s %d %s\r\n", "HTTP/1.1", status, title);
 }
 
@@ -495,25 +512,25 @@ bool http_conn::add_headers(int content_len)
 
 bool http_conn::add_content_length(int content_len)
 {
-//    LOG_INFO("Content-Length:%d\r\n", content_len);
+    LOG_INFO("Content-Length:%d\r\n", content_len);
     return add_response("Content-Length:%d\r\n", content_len);
 }
 
 bool http_conn::add_content_type()
 {
-//    LOG_INFO("Content-Type:%s\r\n", "text/html");
+    LOG_INFO("Content-Type:%s\r\n", "text/html");
     return add_response("Content-Type:%s\r\n", "text/html");
 }
 bool http_conn::add_cookie()
 {
-//    LOG_INFO("set-cookie:%s\r\n", sessionid.c_str());
+    LOG_INFO("set-cookie:%s\r\n", sessionid.c_str());
     if(!sessionid.empty()&&login_stat==FIRST_LOGIN)
         return add_response("set-cookie:%s\r\n", sessionid.c_str());
     return true;
 }
 bool http_conn::add_linger()
 {
-//    LOG_INFO("Connection:%s\r\n", (keep_alive == true) ? "keep-alive" : "close");
+    LOG_INFO("Connection:%s\r\n", (keep_alive == true) ? "keep-alive" : "close");
     return add_response("Connection:%s\r\n", (keep_alive == true) ? "keep-alive" : "close");
 }
 
@@ -524,12 +541,12 @@ bool http_conn::add_blank_line()
 
 bool http_conn::add_content(const char *content)
 {
-//    LOG_INFO("%s\n", content);
+    LOG_INFO("%s\n", content);
     return add_response(content);
 }
 bool http_conn::add_test_reponse()
 {
-//    LOG_INFO("%s\n", test_reponse);
+    LOG_INFO("%s\n", test_reponse);
     add_headers(strlen(test_reponse));
     return add_content(test_reponse);
 }

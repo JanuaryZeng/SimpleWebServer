@@ -85,7 +85,7 @@ public:
 
 public:
     void run();
-    void init(int sockfd, const sockaddr_in &addr, std::string root);
+    void init(int sockfd, const sockaddr_in &addr, string root);
     int getSockfd()
     {
         return m_sockfd;
@@ -130,11 +130,11 @@ private:
 public:
     static int m_epollfd;
     static int m_user_count;
-    static std::shared_ptr<TimeHeap> time_heap;
+    static shared_ptr<TimeHeap> time_heap;
     static Session session; //session保存登录状态
-    std::weak_ptr<heap_timer> timer;
+    weak_ptr<heap_timer> timer;
     LOGIN_STATUS login_stat;
-    std::string sessionid;
+    string sessionid;
 
 private:
     int m_state; //读为0, 写为1
@@ -156,7 +156,7 @@ private:
     char *m_host;                        //主机名
     int m_content_length;
     bool keep_alive;
-    std::shared_ptr<FileStat> file_stat;
+    shared_ptr<FileStat> file_stat;
     // char *m_file_address;
     // struct stat m_file_stat;
     struct iovec m_iv[2];
@@ -165,9 +165,8 @@ private:
     char *m_content; //存储请求头数据
     size_t bytes_to_send;
     size_t bytes_have_send;
-    std::string doc_root;
-    static std::unordered_map<std::string,std::shared_ptr<FileStat>> file_cache;
+    string doc_root;
+    static unordered_map<string,shared_ptr<FileStat> > file_cache;
     static locker file_mutex;
 };
-
 #endif //SIMPLESERVER_HTTP_CONN_H

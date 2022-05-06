@@ -21,7 +21,7 @@
 int main(int argc, char* argv[]) {
     //命令行解析
     Config config;
-    config.parse_ini_file("config.ini");
+    config.parse_ini_file("/home/zxj/project/job_related/SimpleServer/config.ini");
     config.parse_arg(argc, argv);
 
     //日志初始化

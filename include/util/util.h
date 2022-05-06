@@ -17,9 +17,13 @@
 #include <sys/epoll.h>
 #include <cstring>
 #include <unistd.h>
-#include "../http_conn/http_conn.h"
+#include <signal.h>
+#include "../log/logger.h"
 
 class http_conn;
+
+using namespace std;
+
 
 //设置文件描述符为非阻塞
 int setnonblocking(int fd);
@@ -34,13 +38,14 @@ int open_listenfd(int port);
 //重置描述法EPOLLONESHOT
 void reset_oneshot(int epollfd, int fd);
 
-void close_http_conn_cb_func(std::shared_ptr<http_conn> user);
 
-std::map<std::string, std::string> parse_form(std::string str);
+void close_http_conn_cb_func(shared_ptr<http_conn> user);
 
-bool login_user(std::string username, std::string passwd);
+map<string, string> parse_form(string str);
 
-bool register_user(std::string username, std::string passwd);
+bool login_user(string username, string passwd);
+
+bool register_user(string username, string passwd);
 
 void addsig(int sig, void(handler)(int), bool restart = true);
 class Sig
@@ -53,7 +58,7 @@ public:
         epollfd = epollfd_;
         int ret = socketpair(PF_UNIX, SOCK_STREAM, 0, pipefd);
         if(ret==-1){
-//            LOG_ERROR("create socketpait faild\n");
+            LOG_ERROR("create socketpait faild\n");
             abort();
         }
         setnonblocking(pipefd[0]);
@@ -75,5 +80,4 @@ public:
     }
 };
 void usage();
-
 #endif //SIMPLESERVER_UTIL_H
