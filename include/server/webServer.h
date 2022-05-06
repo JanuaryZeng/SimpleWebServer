@@ -22,23 +22,23 @@
 #include "../http_conn/http_conn.h"
 #include "../util/config.h"
 #include "../util/util.h"
-
+#include "../timer/timer.h"
+#include "../log/logger.h"
 
 const int MAX_FD = 65536;           //最大文件描述符
 const int MAX_EVENT_NUMBER = 10000; //最大事件数
 const int TIMESLOT = 5;             //最小超时单位
 
-class webServer {
+class WebServer
+{
 public:
-    webServer();
-    ~webServer();
+    WebServer();
+    ~WebServer();
     void init(Config config);
-//    void init();
     void loop();
 
 private:
-
-    void adjustTimer(std::shared_ptr<heap_timer> timer);
+    void adjustTimer(shared_ptr<heap_timer> timer);
     void initHttpConn(int connfd, struct sockaddr_in client_address);
     bool acceptClient();
     bool dealTimer();
@@ -47,31 +47,31 @@ private:
     void dealWrite(int sockfd);
 
     void initIO();
-
     //基础
     int port;
-    std::string root_dir;
+    string root_dir;
     int close_log;
 
-    std::vector<std::shared_ptr<http_conn>> users;
+    vector<shared_ptr<http_conn>> users;
+
 
     //线程池相关
-    std::shared_ptr<threadpool<http_conn>> thread_pool;
+    shared_ptr<threadpool<http_conn>> thread_pool;
     int thread_num;
-    int max_requests;
+    int max_request;
 
-    //epoll相关
+    //epoll_event相关
     int epollfd;
     epoll_event events[MAX_EVENT_NUMBER];
 
     int listenfd;
-    int ope_linger;
+    int opt_linger;
 
     //定时器
+    shared_ptr<TimeHeap> time_heap;
 
     //信号处理相关
     bool timeout = false;
     bool stop_server = false;
 };
-
 #endif //SIMPLESERVER_WEBSERVER_H
