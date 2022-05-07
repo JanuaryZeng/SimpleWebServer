@@ -55,6 +55,7 @@ private:
 
     locker mutex;  //缓冲区互斥锁
     locker fmutex; //文件描述符互斥锁
+    locker c_mutex;//条件变量锁
     cond cond_;    //条件变量　用于唤醒线程
     bool stop;     //终止线程
 };

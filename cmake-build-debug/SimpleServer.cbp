@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="SimpleServer"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/zxj/project/job_related/SimpleServer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/zxj/project/job_related/SimpleServer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/zxj/project/job_related/SimpleServer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SimpleServer">
+				<Option output="/home/zxj/project/job_related/SimpleServer/SimpleServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zxj/project/job_related/SimpleServer"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/http"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/connection_pool"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/lock"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/log"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/threadpool"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/timer"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/util"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 SimpleServer"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SimpleServer/fast">
+				<Option output="/home/zxj/project/job_related/SimpleServer/SimpleServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zxj/project/job_related/SimpleServer"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/http"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/connection_pool"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/lock"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/log"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/threadpool"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/timer"/>
+					<Add directory="/home/zxj/project/job_related/SimpleServer/include/util"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 SimpleServer/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/zxj/project/job_related/SimpleServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/connection_pool/connection_pool.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/http/http_conn.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/log/logger.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/log/logstream.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/main.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/timer/timer.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/util/config.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/util/util.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/src/webserver.cpp">
+			<Option target="SimpleServer"/>
+		</Unit>
+		<Unit filename="/home/zxj/project/job_related/SimpleServer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
