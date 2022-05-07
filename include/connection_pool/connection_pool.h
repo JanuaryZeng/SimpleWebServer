@@ -23,7 +23,7 @@ public:
     //获取数据库连接
     MYSQL *GetConnection();
     //释放连接
-    bool ReleaseConnection(MYSQL *conn);
+    bool ReleaseConnection(MYSQL *conn); 
     int GetMaxConn()
     {
         return max_conn_;

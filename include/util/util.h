@@ -14,7 +14,7 @@
 #include <cstring>
 #include <unistd.h>
 #include <signal.h>
-#include "../log/logger.h"
+#include "logger.h"
 
 class http_conn;
 

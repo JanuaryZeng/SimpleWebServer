@@ -1,10 +1,6 @@
-//
-// Created by zxj on 2022/5/2.
-//
 #include "../../include/util/util.h"
 #include "../../include/connection_pool/connection_pool.h"
-#include "../../include/http_conn/http_conn.h"
-
+#include "../../include/http/http_conn.h"
 const int MAX_BUFF = 4096;
 
 int Sig::pipefd[2];
@@ -154,7 +150,7 @@ bool login_user(string username, string passwd)
 {
     // static map<string,string> login;
     // if(login.find(username)!=login.end())
-    // return true;
+        // return true;
     Connection conn;
     string select_sql = "select * from user where username='" + username + "' and passwd='" + passwd + "'";
     // printf("%s\n", select_sql.c_str());
@@ -215,12 +211,12 @@ void addsig(int sig, void(handler)(int), bool restart)
 //显示参数说明
 void usage()
 {
-    fprintf(stderr,
-            "webserver [option] \n"
-            "  -p    监听端口号   (默认1234).\n"
-            "  -r    请求队列最大长度    (默认10000).\n"
-            "  -s    数据库连接数量  (默认为8).\n"
-            "  -t    线程数量    (默认为5).\n"
-            "  -l    是否使用优雅关闭连接  (1是 0否 默认:0 不使用).\n"
-            "  -c    关闭日志.\n");
+   fprintf(stderr,
+           "webserver [option] \n"
+           "  -p    监听端口号   (默认1234).\n"
+           "  -r    请求队列最大长度    (默认10000).\n"
+           "  -s    数据库连接数量  (默认为8).\n"
+           "  -t    线程数量    (默认为5).\n"
+           "  -l    是否使用优雅关闭连接  (1是 0否 默认:0 不使用).\n"
+           "  -c    关闭日志.\n");
 }

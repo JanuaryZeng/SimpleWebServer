@@ -4,16 +4,16 @@ string Logger::levelstr(LOGLEVEL level)
 {
     switch (level)
     {
-        case DEBUG:
-            return "[DBG]:";
-        case INFO:
-            return "[INF]:";
-        case WARN:
-            return "[WAR]:";
-        case ERROR:
-            return "[ERR]:";
-        default:
-            return "[???]:";
+    case DEBUG:
+        return "[DBG]:";
+    case INFO:
+        return "[INF]:";
+    case WARN:
+        return "[WAR]:";
+    case ERROR:
+        return "[ERR]:";
+    default:
+        return "[???]:";
     }
 }
 

@@ -7,7 +7,7 @@
 #include <cassert>
 #include <string>
 #include "util.h"
-#include "../log/logger.h"
+#include "logger.h"
 using namespace std;
 
 class Config

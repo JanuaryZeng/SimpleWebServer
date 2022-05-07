@@ -1,6 +1,3 @@
-//
-// Created by zxj on 2022/5/2.
-//
 #include "../../include/util/config.h"
 #include "../../include/util/util.h"
 #include <fstream>
@@ -40,50 +37,50 @@ void Config::parse_arg(int argc, char *argv[])
     {
         switch (opt)
         {
-            case 'p':
-            {
-                port = atoi(optarg);
-                break;
-            }
-            case 'l':
-            {
-                linger = atoi(optarg);
-                break;
-            }
-            case 's':
-            {
-                mysql_conn_num = atoi(optarg);
-                break;
-            }
-            case 't':
-            {
-                thread_num = atoi(optarg);
-                break;
-            }
-            case 'c':
-            {
-                close_log = true;
-                break;
-            }
-            case 'r':
-            {
-                max_request = atoi(optarg);
-                break;
-            }
-            default:
-                usage();
-                abort();
-                break;
+        case 'p':
+        {
+            port = atoi(optarg);
+            break;
+        }
+        case 'l':
+        {
+            linger = atoi(optarg);
+            break;
+        }
+        case 's':
+        {
+            mysql_conn_num = atoi(optarg);
+            break;
+        }
+        case 't':
+        {
+            thread_num = atoi(optarg);
+            break;
+        }
+        case 'c':
+        {
+            close_log = true;
+            break;
+        }
+        case 'r':
+        {
+            max_request = atoi(optarg);
+            break;
+        }
+        default:
+            usage();
+            abort();
+            break;
         }
     }
 }
 void Config::parse_ini_file(string filename){
     ifstream infile(filename.c_str());
-    if (!infile)
-    {
-        fprintf(stderr, "file open error!");
-        return;
-    }
+	if (!infile) 
+	{
+		fprintf(stderr, "file open error!");
+		return;
+	}
     map<string,string> kv;
     string line,key,val;
     while (getline(infile, line)){
@@ -143,66 +140,65 @@ void Config::parse_ini_file(string filename){
 }
 bool Config::parse_line(string line,string &key,string &val){
     if (line.empty())
-    {
-        return false;
-    }
-    int start_pos = 0, end_pos = line.size() - 1, pos = 0;
-    if ((pos = line.find('#')) != -1)
-    {
-        if (0 == pos)
-        {//行的第一个字符就是注释字符
-            return false;
-        }
-        end_pos = pos - 1;
-    }
-    string new_line = line.substr(start_pos, end_pos + 1 - start_pos);  // 预处理，删除注释部分
-
-    if ((pos = new_line.find('=')) == -1)
-    {
-        return false;  // 没有=号
-    }
-
-    key = new_line.substr(0, pos);
-    val = new_line.substr(pos + 1, end_pos + 1- (pos + 1));
-
-    trim(key);
-    if (key.empty())
-    {
-        return false;
-    }
-    trim(val);
-    return true;
+	{
+		return false;
+	}
+	int start_pos = 0, end_pos = line.size() - 1, pos = 0;
+	if ((pos = line.find('#')) != -1)
+	{
+		if (0 == pos)
+		{//行的第一个字符就是注释字符
+			return false;
+		}
+		end_pos = pos - 1;
+	}
+	string new_line = line.substr(start_pos, end_pos + 1 - start_pos);  // 预处理，删除注释部分
+ 
+	if ((pos = new_line.find('=')) == -1)
+	{
+		return false;  // 没有=号
+	}
+ 
+	key = new_line.substr(0, pos);
+	val = new_line.substr(pos + 1, end_pos + 1- (pos + 1));
+ 
+	trim(key);
+	if (key.empty())
+	{
+		return false;
+	}
+	trim(val);
+	return true;
 }
 void Config::trim(string &str){
     if (str.empty())
-    {
-        return;
-    }
-    size_t i, start_pos, end_pos;
-    for (i = 0; i < str.size(); ++i)
-    {
-        if (!isspace(str[i]))
-        {
-            break;
-        }
-    }
-    if (i == str.size())
-    {
-        str = "";
-        return;
-    }
-
-    start_pos = i;
-
-    for (i = str.size() - 1; i >= 0; --i)
-    {
-        if (!isspace(str[i]))
-        {
-            break;
-        }
-    }
-    end_pos = i;
-
-    str = str.substr(start_pos, end_pos - start_pos + 1);
+	{
+		return;
+	}
+	size_t i, start_pos, end_pos;
+	for (i = 0; i < str.size(); ++i)
+	{
+		if (!isspace(str[i]))
+		{
+			break;
+		}
+	}
+	if (i == str.size())
+	{
+		str = "";
+		return;
+	}
+ 
+	start_pos = i;
+ 
+	for (i = str.size() - 1; i >= 0; --i)
+	{
+		if (!isspace(str[i]))
+		{
+			break;
+		}
+	}
+	end_pos = i;
+ 
+	str = str.substr(start_pos, end_pos - start_pos + 1);
 }
-
