@@ -2,15 +2,15 @@
 // Created by zxj on 2022/3/21.
 //
 
-#ifndef SIMPLESERVER_THREAD_POOL_H
-#define SIMPLESERVER_THREAD_POOL_H
+#ifndef SIMPLESERVER_THREADPOOL_H
+#define SIMPLESERVER_THREADPOOL_H
 
 #include <thread_db.h>
 #include <vector>
 #include <memory>
 #include <cstdio>
 #include <list>
-#include "../lock/lock.h"
+#include "locker.h"
 
 const int MIN_THREAD_NUM = 1;
 const int MAX_THREAD_NUM = 1024;
@@ -105,4 +105,4 @@ void threadpool<T>::run() {
     }
 }
 
-#endif //SIMPLESERVER_THREAD_POOL_H
+#endif //SIMPLESERVER_THREADPOOL_H

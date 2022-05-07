@@ -1,7 +1,3 @@
-//
-// Created by zxj on 2022/5/6.
-//
-
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <fcntl.h>
@@ -156,11 +152,9 @@ int LogStream::flush()
 
 void LogStream::run()
 {
-    mutex.lock();
     while (!stop)
     {
-        cond_.wait(mutex.get()); //等待　write_buf_　有被赋值
-        mutex.unlock();
+        cond_.wait(); //等待　write_buf_　有被赋值
         flushWriteBuf();
         if (cur_lines_ > max_lines_) //根据写入行数　更改文件名
         {

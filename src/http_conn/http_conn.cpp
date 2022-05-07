@@ -1,8 +1,7 @@
-//
-// Created by zxj on 2022/3/28.
-//
-
+#include <sys/syslog.h>
 #include "../../include/http_conn/http_conn.h"
+#include "../../include/util/util.h"
+
 //定义http响应的一些状态信息
 const char *ok_200_title = "OK";
 const char *redirect_302_title = "Found";

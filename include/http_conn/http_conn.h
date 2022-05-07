@@ -1,9 +1,6 @@
-//
-// Created by zxj on 2022/3/28.
-//
+#ifndef WEBSERVER_HTTP_CONN_H_
+#define WEBSERVER_HTTP_CONN_H_
 
-#ifndef SIMPLESERVER_HTTP_CONN_H
-#define SIMPLESERVER_HTTP_CONN_H
 #include <unistd.h>
 #include <signal.h>
 #include <sys/types.h>
@@ -26,10 +23,9 @@
 #include <sys/uio.h>
 #include <unordered_map>
 
-#include "../lock/lock.h"
-#include "../util/util.h"
-#include "../timer/timer.h"
+#include "../lock/locker.h"
 #include "session.h"
+#include "../timer/timer.h"
 
 struct FileStat{
     FileStat(struct stat _status,char *_addraass):status(_status),address(_addraass),usage_times(1){}
@@ -169,4 +165,4 @@ private:
     static unordered_map<string,shared_ptr<FileStat> > file_cache;
     static locker file_mutex;
 };
-#endif //SIMPLESERVER_HTTP_CONN_H
+#endif //WEBSERVER_HTTP_CONN_H_

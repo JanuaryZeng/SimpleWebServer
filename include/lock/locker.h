@@ -2,8 +2,8 @@
 // Created by zxj on 2022/3/21.
 //
 
-#ifndef SIMPLESERVER_LOCK_H
-#define SIMPLESERVER_LOCK_H
+#ifndef SIMPLESERVER_LOCKER_H
+#define SIMPLESERVER_LOCKER_H
 #include <pthread.h>
 #include <exception>
 #include <iostream>
@@ -120,4 +120,4 @@ private:
     locker &mutex;
 };
 
-#endif //SIMPLESERVER_LOCK_H
+#endif //SIMPLESERVER_LOCKER_H

@@ -1,8 +1,4 @@
-//
-// Created by zxj on 2022/3/21.
-//
-
-#include "../../include/server/webServer.h"
+#include <webServer.h>
 WebServer::WebServer()
 {
     //http_conn类对象
@@ -248,7 +244,7 @@ void WebServer::loop()
             {
                 bool flag = dealSignal();
                 if (false == flag)
-                LOG_ERROR("deal signal failure\n");
+                    LOG_ERROR("deal signal failure\n");
             }
                 //处理客户连接上接收到的数据
             else if (events[i].events & EPOLLIN)
@@ -265,7 +261,7 @@ void WebServer::loop()
             int size = time_heap->size();
             time_heap->tick();
             if(size!=time_heap->size())
-            LOG_INFO("timer tick time_heap.size = %d(before):%d\n", size, time_heap->size());
+                LOG_INFO("timer tick time_heap.size = %d(before):%d\n", size, time_heap->size());
             // printf("keep-alive nums:%d\n",time_heap->size());
             // printf("\033[1A\n");
             LOG_FLUSH();

@@ -1,8 +1,4 @@
-//
-// Created by zxj on 2022/5/6.
-//
 #include "../../include/log/logger.h"
-
 
 string Logger::levelstr(LOGLEVEL level)
 {

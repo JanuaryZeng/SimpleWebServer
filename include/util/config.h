@@ -1,12 +1,14 @@
-//
-// Created by zxj on 2022/5/2.
-//
+#ifndef WEBSERVER_CONFIG_H_
+#define WEBSERVER_CONFIG_H_
 
-#ifndef SIMPLESERVER_CONFIG_H
-#define SIMPLESERVER_CONFIG_H
-
+#include <unistd.h>
+#include <fcntl.h>
+#include <cstdlib>
+#include <cassert>
 #include <string>
-#include "../../include/log/logger.h"
+#include "util.h"
+#include "../log/logger.h"
+using namespace std;
 
 class Config
 {
@@ -15,7 +17,7 @@ public:
     ~Config(){};
 
     void parse_arg(int argc, char *argv[]);
-    void parse_ini_file(std::string filename);
+    void parse_ini_file(string filename);
 
     //端口号
     int port;
@@ -31,22 +33,23 @@ public:
 
     //数据库连接池数量
     int mysql_conn_num;
-    std::string mysql_host;
-    std::string mysql_user;
-    std::string mysql_passwd;
-    std::string mysql_db_name;
+    string mysql_host;
+    string mysql_user;
+    string mysql_passwd;
+    string mysql_db_name;
     int mysql_port;
+
 
     //是否关闭日志
     int close_log;
     LOGLEVEL log_level;
-    std::string log_pre_filename;
+    string log_pre_filename;
     size_t log_buf_size;
     size_t log_max_lines;
 
 private:
-    bool parse_line(std::string line,std::string &key,std::string &val);
-    void trim(std::string &str);
+    bool parse_line(string line,string &key,string &val);
+    void trim(string &str);
 };
 
-#endif //SIMPLESERVER_CONFIG_H
+#endif  //WEBSERVER_CONFIG_H_

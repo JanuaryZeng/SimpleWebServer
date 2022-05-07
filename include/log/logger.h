@@ -1,15 +1,11 @@
-//
-// Created by zxj on 2022/5/6.
-//
-
-#ifndef SIMPLESERVER_LOGGER_H
-#define SIMPLESERVER_LOGGER_H
+#ifndef WEBSERVER_LOG_H_
+#define WEBSERVER_LOG_H_
 #include <cstdio>
 #include <cstdarg>
 #include <cstring>
 #include <time.h>
 #include <sys/time.h>
-#include "../lock/lock.h"
+#include "../lock/locker.h"
 #include "../log/logstream.h"
 
 using namespace std;
@@ -84,4 +80,4 @@ private:
 // #define LOG_WARN(msg, args...)   {}
 // #define LOG_ERROR(msg, args...)   {}
 // #define LOG_FLUSH() {};
-#endif //SIMPLESERVER_LOGGER_H
+#endif //WEBSERVER_LOG_H_

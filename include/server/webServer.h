@@ -1,9 +1,6 @@
-//
-// Created by zxj on 2022/3/21.
-//
+#ifndef WEBSERVER_H_
+#define WEBSERVER_H_
 
-#ifndef SIMPLESERVER_WEBSERVER_H
-#define SIMPLESERVER_WEBSERVER_H
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -18,12 +15,10 @@
 #include <memory>
 #include <vector>
 
-#include "../thread_pool/thread_pool.h"
-#include "../http_conn/http_conn.h"
-#include "../util/config.h"
-#include "../util/util.h"
+#include "threadpool.h"
+#include "http_conn.h"
 #include "../timer/timer.h"
-#include "../log/logger.h"
+#include "../util/config.h"
 
 const int MAX_FD = 65536;           //最大文件描述符
 const int MAX_EVENT_NUMBER = 10000; //最大事件数
@@ -74,4 +69,4 @@ private:
     bool timeout = false;
     bool stop_server = false;
 };
-#endif //SIMPLESERVER_WEBSERVER_H
+#endif //WEBSERVER_H_

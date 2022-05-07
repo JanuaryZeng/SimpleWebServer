@@ -1,9 +1,5 @@
-//
-// Created by zxj on 2022/5/2.
-//
-
-#ifndef SIMPLESERVER_UTIL_H
-#define SIMPLESERVER_UTIL_H
+#ifndef WEBSERVER_UTIL_H_
+#define WEBSERVER_UTIL_H_
 
 #include <cstdlib>
 #include <string>
@@ -80,4 +76,4 @@ public:
     }
 };
 void usage();
-#endif //SIMPLESERVER_UTIL_H
+#endif //WEBSERVER_UTIL_H_

@@ -1,17 +1,13 @@
-//
-// Created by zxj on 2022/5/6.
-//
-
-#ifndef SIMPLESERVER_LOGSTREAM_H
-#define SIMPLESERVER_LOGSTREAM_H
+#ifndef WEBSERVER_LOG_STREAM_H_
+#define WEBSERVER_LOG_STREAM_H_
 
 #include <string>
 #include <cstdio>
 #include <cstring>
 #include <cassert>
 #include <unistd.h>
-#include "../util/noncopyable.h"
-#include "../lock/lock.h"
+#include "noncopyable.h"
+#include "locker.h"
 using namespace std;
 
 const size_t MIN_BUF_SIZE = 4096;
@@ -62,4 +58,4 @@ private:
     cond cond_;    //条件变量　用于唤醒线程
     bool stop;     //终止线程
 };
-#endif //SIMPLESERVER_LOGSTREAM_H
+#endif //WEBSERVER_LOG_STREAM_H_

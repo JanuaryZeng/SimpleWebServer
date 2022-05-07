@@ -1,18 +1,15 @@
-//
-// Created by zxj on 2022/5/2.
-//
-
-#ifndef SIMPLESERVER_NONCOPYABLE_H
-#define SIMPLESERVER_NONCOPYABLE_H
+#ifndef WEBSERVER_NONCAPYABLE_H_
+#define WEBSERVER_NONCAPYABLE_H_
 
 class Noncopyable
 {
 protected:
-    Noncopyable(){}
-    ~Noncopyable(){}
+    Noncopyable() {}
+    ~Noncopyable() {}
+
 private:
-    Noncopyable(const Noncopyable&) = delete;
-    Noncopyable &operator=(const Noncopyable&) = delete;
+    Noncopyable(const Noncopyable &);
+    const Noncopyable &operator=(const Noncopyable &);
 };
 
-#endif //SIMPLESERVER_NONCOPYABLE_H
+#endif  //WEBSERVER_NONCAPYABLE_H_

@@ -1,9 +1,5 @@
-//
-// Created by zxj on 2022/5/5.
-//
-
-#ifndef SIMPLESERVER_CONNECTION_POOL_H
-#define SIMPLESERVER_CONNECTION_POOL_H
+#ifndef WEBSERVER_CONNECTION_POOL_H_
+#define WEBSERVER_CONNECTION_POOL_H_
 
 #include <cstdio>
 #include <list>
@@ -11,7 +7,7 @@
 #include <string>
 #include <algorithm>
 
-#include "../lock/lock.h"
+#include "locker.h"
 #include "../util/noncopyable.h"
 #include "../log/logger.h"
 const int MIN_CONN_NUM = 1; //数据库最少链接数
@@ -20,7 +16,7 @@ const int MAX_CONN_NUM = 1024; //数据库最多链接数
 class ConnectionPool
 {
 public:
-    //单例模式
+    //单例模式 
     static ConnectionPool *GetInstance();
     //初始化数据库连接  url:数据库地址  user:用户名  passwd:密码  db_name:数据库名  port:端口号  max_conn:在连接池中初始化多少连接
     void init(std::string url, std::string user, std::string passwd, std::string db_name, int port, int max_conn);
@@ -51,7 +47,7 @@ private:
     bool is_init_;        //是否初始化   仅能初始化一次  因此只能链接一个数据库
 };
 
-//使用 Connection 类来管理连接
+//使用 Connection 类来管理连接 
 //构建函数 从连接池中获取连接
 //析构函数 释放连接到连接池
 class Connection : Noncopyable
@@ -68,4 +64,4 @@ public:
 private:
     MYSQL *conn_;
 };
-#endif //SIMPLESERVER_CONNECTION_POOL_H
+#endif //WEBSERVER_CONNECTION_POOL_H_
