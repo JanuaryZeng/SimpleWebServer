@@ -586,6 +586,7 @@ bool http_conn::process_write(HTTP_CODE ret)
         if (file_stat->status.st_size != 0)
         {
             add_headers(file_stat->status.st_size);
+            //将文件和响应头内容一起发出
             m_iv[0].iov_base = m_write_buf;
             m_iv[0].iov_len = m_write_idx;
             m_iv[1].iov_base = file_stat->address;
