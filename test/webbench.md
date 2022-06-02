@@ -27,7 +27,7 @@ Usage:
 | -?\|-h\|--help |                     显示帮助信息                     |
 
 ``` shell
- ./webbench -t 5 -c 5000 -2 --get http://127.0.0.1:12345/   //get 方法
+ ./webbench -t 5 -c 5000 -2 --get http://127.0.0.1:9000/   //get 方法
 ```
 
 **HTTP请求**
@@ -40,7 +40,7 @@ Connection: close
 
 
 ```
-./webbench -t 5 -c 5000 -2  -m "username=root&passwd=123" --post http://127.0.0.1:12345/
+./webbench -t 5 -c 5000 -2  -m "username=1&passwd=1" --post http://127.0.0.1:9000/
 ```
 
 **HTTP请求**
