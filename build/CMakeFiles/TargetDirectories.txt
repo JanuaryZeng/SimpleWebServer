@@ -1,0 +1,3 @@
+/home/zxj/project/job_related/SimpleServer/build/CMakeFiles/rebuild_cache.dir
+/home/zxj/project/job_related/SimpleServer/build/CMakeFiles/edit_cache.dir
+/home/zxj/project/job_related/SimpleServer/build/CMakeFiles/SimpleServer.dir
