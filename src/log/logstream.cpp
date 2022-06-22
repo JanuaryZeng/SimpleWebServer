@@ -26,6 +26,12 @@ LogStream::~LogStream()
     munmap(buf_in_, sizeof(size_t));
 };
 //初始化日志
+/**
+ * @param pre_filename 文件名前缀
+ * @param buf_size     缓冲区大小
+ * @param max_lines    最大行数
+ * @return
+ */
 bool LogStream::init(string pre_filename, size_t buf_size, size_t max_lines)
 {
     pre_filename_ = pre_filename;
@@ -34,6 +40,7 @@ bool LogStream::init(string pre_filename, size_t buf_size, size_t max_lines)
     buf_size = min(MAX_BUF_SIZE, buf_size);
     buf_size_ = buf_size;
     today_ = getTime();
+    //文件名字
     full_name_ = pre_filename_ + "_" + today_ + "_" + to_string(num_) + ".log";
     fp_ = fopen(full_name_.c_str(), "a");
     if (fp_ < 0)
@@ -41,6 +48,8 @@ bool LogStream::init(string pre_filename, size_t buf_size, size_t max_lines)
         LOG_ERROR("log file open failed!!\n");
         return false;
     }
+    //4095->111111111111
+    //此操作让buf_size_只能是4096的倍数
     buf_size_ += 4095;
     buf_size_ &= ~4095;
     //新建一个日志缓冲池
@@ -49,6 +58,7 @@ bool LogStream::init(string pre_filename, size_t buf_size, size_t max_lines)
     //备用日志缓冲池
     next_buf_ = (char *)mmap(NULL, buf_size_, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     next_buf_[0] = '\0';
+    //用于和子进程共享写入位置
     char *mem = (char *)mmap(NULL, sizeof(size_t)+sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     buf_in_ = (size_t*)mem;
     flag = (int *)(mem+sizeof(size_t));
