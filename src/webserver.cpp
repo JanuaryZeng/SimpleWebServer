@@ -234,7 +234,7 @@ void WebServer::loop()
                 // reset_oneshot(epollfd, listenfd);
                 // while(acceptClient());
             }
-            else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR))
+            else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR))//处理错误
             {
                 //如有异常 关闭客户端链接
                 users[sockfd]->close_conn();

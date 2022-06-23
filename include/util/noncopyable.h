@@ -4,12 +4,12 @@
 class Noncopyable
 {
 protected:
-    Noncopyable() {}
-    ~Noncopyable() {}
+    Noncopyable() = default;
+    ~Noncopyable() = default;
 
 private:
-    Noncopyable(const Noncopyable &);
-    const Noncopyable &operator=(const Noncopyable &);
+    Noncopyable(const Noncopyable &) = delete;
+    const Noncopyable &operator=(const Noncopyable &) = delete;
 };
 
 #endif  //WEBSERVER_NONCAPYABLE_H_

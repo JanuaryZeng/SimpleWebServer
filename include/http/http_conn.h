@@ -30,7 +30,7 @@
 #include "../util/util.h"
 #include "../http/session.h"
 struct FileStat{
-    FileStat(struct stat _status,char *_addraass):status(_status),address(_addraass),usage_times(1){}
+    FileStat(struct stat _status,char *_addrass):status(_status),address(_addrass),usage_times(1){}
     ~FileStat(){
        munmap(address, status.st_size);
     }

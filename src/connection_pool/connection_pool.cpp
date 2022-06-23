@@ -53,7 +53,7 @@ void ConnectionPool::init(std::string host, std::string user, std::string passwd
             LOG_ERROR("mysqlpool init failed!!!\n");
             abort();
         }
-        conn = mysql_real_connect(conn, host.c_str(), user.c_str(), passwd.c_str(), db_name.c_str(), port, NULL, 0);
+        conn = mysql_real_connect(conn, host_.c_str(), user_.c_str(), passwd_.c_str(), db_name_.c_str(), port, NULL, 0);
         if (NULL == conn)
         {
             LOG_ERROR("mysqlpool init failed!!!\n");

@@ -65,7 +65,7 @@ bool TimeHeap::adjustTimer(shared_ptr<heap_timer> timer, int delay)
 {
     if (!timer)
         return false;
-    timer->expire = time(NULL) + delay;
+    timer->expire = time(nullptr) + delay;
     if (delay > 0)
     {
         percolate_down(timer->hole_);
@@ -126,7 +126,7 @@ void TimeHeap::adjust()
     mutex.unlock();
     for (auto i:tmp)
     {
-        if (NULL == array[i]->cb_func)
+        if (nullptr == array[i]->cb_func)
         {
             array[i]->expire = 0;
             percolate_up(i);
