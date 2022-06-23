@@ -26,7 +26,7 @@ bool Logger::init(string file_name, bool close_log, size_t log_buf_size, size_t 
     if (!logstream_.init(file_name, log_buf_size, log_max_lines))
     {
         LOG_ERROR("logger init failed!!\n");
-        close_log = true;
+        close_log_ = true;
         return false;
     }
     return true;
