@@ -73,7 +73,7 @@ public:
     }
 
 private:
-    void movetotop(string key) //将最新访问的用户移动到最前变
+    void movetotop(string key) //将最新访问的用户移动到最前边
     {
         auto p = *cache[key];
         users.erase(cache[key]);
