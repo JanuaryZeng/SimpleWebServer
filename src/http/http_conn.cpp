@@ -41,6 +41,7 @@ void http_conn::init(int sockfd, const sockaddr_in &addr, string root)
     m_sockfd = sockfd;
     m_address = addr;
     int reuse = 1;
+    //端口复用
     setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
     addfd(m_epollfd, sockfd, true);
     m_user_count++;
@@ -93,7 +94,7 @@ bool http_conn::read()
                 bytes_read = 0;
                 continue;
             }
-            else if (errno == EAGAIN || errno == EWOULDBLOCK) //非阻塞IO文件描述符 发生阻塞
+            else if (errno == EAGAIN || errno == EWOULDBLOCK) //非阻塞IO文件描述符 发生阻塞 即读完了
             {
                 break;
             }
@@ -122,6 +123,7 @@ http_conn::LINE_STATUS http_conn::parse_line()
                 return LINE_OPEN;
             else if (m_read_buf[m_checked_idx + 1] == '\n')
             {
+                //将\r\n替换成\0
                 m_read_buf[m_checked_idx++] = '\0';
                 m_read_buf[m_checked_idx++] = '\0';
                 return LINE_OK;
@@ -143,9 +145,17 @@ http_conn::LINE_STATUS http_conn::parse_line()
 }
 
 //解析http请求行，获得请求方法，目标url及http版本号
+/**
+ * 例子：
+ * GET http://127.0.0.1:9000/index.html/ HTTP/1.1
+ */
 http_conn::HTTP_CODE http_conn::parse_request_line(char *text) 
 {
     //char *strpbrk(const char *str1, const char *str2) 检索字符串 str1 中第一个匹配字符串 str2 中字符的字符，不包含空结束字符'\0'。
+    /**
+     * m_url     |
+     *        GET0http://127.0.0.1:9000/index.html/ HTTP/1.1
+     */
     m_url = strpbrk(text, " \t");
     if (!m_url)
     {
@@ -161,14 +171,29 @@ http_conn::HTTP_CODE http_conn::parse_request_line(char *text)
     }
     else
         return BAD_REQUEST;
+    /**
+    * m_url      |
+    *        GET0http://127.0.0.1:9000/index.html/ HTTP/1.1
+    */
     m_url += strspn(m_url, " \t"); //size_t strspn(const char *str1, const char *str2) 检索字符串 str1 中第一个不在字符串 str2 中出现的字符下标。
+    /**
+    * m_version                                   |
+    *        GET0http://127.0.0.1:9000/index.html/0HTTP/1.1
+    */
     m_version = strpbrk(m_url, " \t");
     if (!m_version)
         return BAD_REQUEST;
     *m_version++ = '\0';
+    /**
+    * m_version                                    |
+    *        GET0http://127.0.0.1:9000/index.html/0HTTP/1.1
+    */
     m_version += strspn(m_version, " \t");
     if (strcasecmp(m_version, "HTTP/1.1") != 0)
         return BAD_REQUEST;
+    /**
+     * m_url = /index.html/
+     */
     if (strncasecmp(m_url, "http://", 7) == 0)
     {
         m_url += 7;
@@ -264,8 +289,13 @@ http_conn::HTTP_CODE http_conn::process_read()
     HTTP_CODE ret = NO_REQUEST;
     char *text = 0;
 
+    /**
+     * 1.解析状态为解析内容&&行解析状态为成功
+     * 2.解析行成功
+     */
     while ((m_check_state == CHECK_STATE_CONTENT && line_status == LINE_OK) || ((line_status = parse_line()) == LINE_OK))
     {
+        //获得当前解析行的首地址
         text = get_line();
         m_start_line = m_checked_idx;
         switch (m_check_state)
@@ -427,7 +457,7 @@ bool http_conn::write()
         return true;
     }
 
-    while (1)
+    while (true)
     {
         temp = writev(m_sockfd, m_iv, m_iv_count);
 

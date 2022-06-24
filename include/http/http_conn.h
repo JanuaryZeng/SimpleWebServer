@@ -22,6 +22,7 @@
 #include <sys/wait.h>
 #include <sys/uio.h>
 #include <unordered_map>
+#include <iostream>
 
 #include "../lock/locker.h"
 #include "../connection_pool/connection_pool.h"
@@ -36,7 +37,7 @@ struct FileStat{
     }
     struct stat status;
     char * address;
-    uint32_t usage_times;
+    uint32_t usage_times;//使用次数
 };
 
 class http_conn
@@ -72,9 +73,9 @@ public:
     };
     enum LINE_STATUS //行解析状态
     {
-        LINE_OK = 0,
-        LINE_BAD,
-        LINE_OPEN
+        LINE_OK = 0,//读取一行成功
+        LINE_BAD,//读取失败
+        LINE_OPEN//全部读完
     };
 
 public:
@@ -100,6 +101,7 @@ public:
 
 private:
     void init(); //初始化
+    //读系列函数
     HTTP_CODE process_read();
     bool process_write(HTTP_CODE ret);
     HTTP_CODE parse_request_line(char *text);
@@ -110,6 +112,7 @@ private:
     char *get_line() { return m_read_buf + m_start_line; };
     LINE_STATUS parse_line();
     void unmap();
+    //写系列函数
     bool add_response(const char *format, ...);
     bool add_content(const char *content);
     bool add_status_line(int status, const char *title);
@@ -121,6 +124,7 @@ private:
     bool add_blank_line();
     bool add_test_reponse();
 
+    //总体流程
     void process();
     bool read();
     bool write();
@@ -168,3 +172,23 @@ private:
     static locker file_mutex;
 };
 #endif //WEBSERVER_HTTP_CONN_H_
+/**
+
+ * char *strpbrk(const char *str1, const char *str2) 检索字符串 str1 中第一个匹配字符串 str2 中字符的字符，不包含空结束字符'\0'。
+ * 该函数返回 str1 中第一个匹配字符串 str2 中字符的字符数，如果未找到字符则返回 NULL。
+
+ * int strcasecmp (const char *s1, const char *s2); strcasecmp()用来比较参数s1 和s2 字符串，比较时会自动忽略大小写的差异。
+ * 返回值：若参数s1 和s2 字符串相同则返回0。s1 长度大于s2 长度则返回大于0 的值，s1 长度若小于s2 长度则返回小于0的值。
+
+ * size_t strspn(const char *str1, const char *str2)
+ * str1 -- 要被检索的 C 字符串。
+ * str2 -- 该字符串包含了要在 str1 中进行匹配的字符列表。
+ * 该函数返回 str1 中第一个不在字符串 str2 中出现的字符下标。
+
+ * char *strchr(const char *str, int c)
+ * str -- 要被检索的 C 字符串。
+ * c -- 在 str 中要搜索的字符。
+ * 该函数返回在字符串 str 中第一次出现字符 c 的位置，如果未找到该字符则返回 NULL。
+
+ *
+ */
